@@ -1,26 +1,21 @@
 //
-//  ViewController.swift
+//  SecondViewController.swift
 //  TestProject
 //
 //  Created by 松居麻衣 on 2020/05/23.
 //  Copyright © 2020 松居麻衣. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class ViewController: UIViewController {
+class SecondViewController: UIViewController {
     private var myButton: UIButton!
-    private var myTextField: UITextField!
-    
-    private var freeword = ""
-    private let dataStore = FreeTextDataStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        
-        // =================ボタン生成=================
+        view.backgroundColor = .blue
         // Buttonを生成する.
         myButton = UIButton()
 
@@ -45,10 +40,11 @@ class ViewController: UIViewController {
         myButton.layer.cornerRadius = 20.0
 
         // タイトルを設定する(通常時).
-        myButton.setTitle("保存する", for: .normal)
+        myButton.setTitle("ボタン(通常)", for: .normal)
         myButton.setTitleColor(UIColor.white, for: .normal)
 
-        // タイトルを設定する(ボタンがハイライトされた時)
+        // タイトルを設定する(ボタンがハイライトされた時).
+        myButton.setTitle("ボタン(押された時)", for: .highlighted)
         myButton.setTitleColor(UIColor.black, for: .highlighted)
 
         // ボタンにタグをつける.
@@ -59,40 +55,15 @@ class ViewController: UIViewController {
 
         // ボタンをViewに追加.
         self.view.addSubview(myButton)
-        
-        // ==================================
-        
-        // =================テキストフィールド生成=================
-        // UITextFieldの配置するx,yと幅と高さを設定.
-        let tWidth: CGFloat = 200
-        let tHeight: CGFloat = 30
-        let tX: CGFloat = (self.view.bounds.width - tWidth)/2
-        let tY: CGFloat = (self.view.bounds.height - tHeight)/2 - 80
-
-        // UITextFieldを作成する.
-        myTextField = UITextField(frame: CGRect(x: tX, y: tY, width: tWidth, height: tHeight))
-
-        // 表示する文字を代入する.
-        myTextField.text = dataStore.loadText()
-
-        // 枠を表示する.
-        myTextField.borderStyle = .roundedRect
-
-        // クリアボタンを追加.
-        myTextField.clearButtonMode = .whileEditing
-
-        // Viewに追加する
-        self.view.addSubview(myTextField)
-        
-        // ==================================
     }
 
     /*
      ボタンのイベント.
      */
     @objc internal func onClickMyButton(sender: UIButton) {
-        dataStore.save(text: myTextField.text ?? "")
-
+        print("onClickMyButton:");
+        print("sender.currentTitle: \(String(describing: sender.currentTitle))")
+        print("sender.tag: \(sender.tag)")
     }
 
 }
